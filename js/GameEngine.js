@@ -30,7 +30,7 @@ export class GameEngine {
         for (let i = 0; i < n; i++) {
             const color = `hsl(${Math.random() * 360}, 70%, 70%)`;
             const button = new MemoryButton(i, color, this.container);
-            button.setPosition(0 + i * 170);
+            button.setPosition(0, i * 170);
             button.disable();
             this.buttons.push(button);
         }

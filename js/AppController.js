@@ -18,14 +18,14 @@ export class AppController {
 
     initUI() {
         this.label.textContent = STRINGS.LABEL_PROMPT;
-        this.button.textContent = STRINGS.BUTTON_GO;
+        this.button.textContent = STRINGS.BTN_LABEL;
 
         this.button.onclick = () => this.startGame();
     }
 
     startGame() {
         if (!NumberValidator.isValidNumber(this.input.value)) {
-            this.message.textContent = STRINGS.ERROR_INVALID_NUMBER;
+            this.message.textContent = STRINGS.ERROR_RANGE_MESSAGE;
             return;
         }
 
@@ -33,7 +33,7 @@ export class AppController {
         this.engine.createButtons(n);
 
         setTimeout(() => {
-            this.engine.scramble(5);
+            this.engine.scramble(n);
         }, n * 1000);    
     
     }
