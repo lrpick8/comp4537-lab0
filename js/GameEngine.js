@@ -9,6 +9,7 @@ Used ChatGPT to help write this class.
 */
 import { MemoryButton } from "./MemoryButton.js";
 import { STRINGS } from "../lang/messages/en/user.js";
+import { ColourList } from "./ColourList.js";
 
 export class GameEngine {
     constructor(container, messageBox) {
@@ -16,6 +17,7 @@ export class GameEngine {
         this.messageBox = messageBox;
         this.buttons = [];
         this.expectedClicks = 0;
+        this.colourPool = [];
     }
 
     clear() {
@@ -25,13 +27,25 @@ export class GameEngine {
         this.expectedClicks = 0;
     }
 
+    shuffleColours() {
+        this.colourPool = [...ColourList];
+        for (let i = this.colourPool.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.colourPool[i], this.colourPool[j]] = [this.colourPool[j], this.colourPool[i]];
+        }
+    }
+
     createButtons(n) {
         this.clear();
+        this.shuffleColours();
+
         for (let i = 0; i < n; i++) {
-            const color = `hsl(${Math.random() * 360}, 70%, 70%)`;
+            const color = this.colourPool.pop();
+
             const button = new MemoryButton(i, color, this.container);
             button.setPosition(0, i * 170);
             button.disable();
+            
             this.buttons.push(button);
         }
     }
