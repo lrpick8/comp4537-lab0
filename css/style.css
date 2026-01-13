@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#gameArea {
+    width: 95%;
+    height: 80vh;
+    border: 2px solid #000;
+    position: relative;
+    background-color: #f0f0f0;
+}
+
+.memory-btn {
+    position: absolute;
+    width: 10em;
+    height: 5em;
+    font-size: 1.2em;
+    cursor: pointer;
+}
