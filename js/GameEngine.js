@@ -7,6 +7,8 @@ the user clicks a button.
 
 Used ChatGPT to help write this class.
 */
+import { MemoryButton } from "./MemoryButton.js";
+import { STRINGS } from "../lang/messages/en/user.js";
 
 export class GameEngine {
     constructor(container, messageBox) {
