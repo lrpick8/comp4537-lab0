@@ -11,7 +11,10 @@ export class MemoryButton {
     constructor(order, color, container) {
         this.order = order;
         this.container = container;
-        
+
+        this.topRatio = 0;
+        this.leftRatio = 0;
+
         this.button = document.createElement("button");
         this.button.className = "memory-button";
         this.button.style.backgroundColor = color;
@@ -20,9 +23,29 @@ export class MemoryButton {
         container.appendChild(this.button);
     }
 
-    setPosition(top, left) {
-        this.button.style.top = `${top}px`;
-        this.button.style.left = `${left}px`;
+     setPosition(top, left) {
+        const rect = this.container.getBoundingClientRect();
+
+        this.topRatio = top / rect.height;
+        this.leftRatio = left / rect.width;
+
+        this.applyPosition();
+    }
+
+    applyPosition() {
+        const rect = this.container.getBoundingClientRect();
+
+        const buttonWidth = this.button.offsetWidth;
+        const buttonHeight = this.button.offsetHeight;
+
+        const maxX = rect.width - buttonWidth;
+        const maxY = rect.height - buttonHeight;
+
+        this.button.style.top =
+            Math.min(this.topRatio * rect.height, maxY) + "px";
+
+        this.button.style.left =
+            Math.min(this.leftRatio * rect.width, maxX) + "px";
     }
 
     hideNumber() {
