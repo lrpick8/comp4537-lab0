@@ -35,18 +35,39 @@ export class GameEngine {
         }
     }
 
+    getBoardDimensions() {
+        const rect = this.container.getBoundingClientRect();
+        return { width: rect.width, height: rect.height };
+    }
+
     createButtons(n) {
         this.clear();
         this.shuffleColours();
+
+        const { width } = this.getBoardDimensions();
+
+        const buttonWidth = 150;
+        const buttonHeight = 80;
+        const buttonSpacing = 10;
+
+        let x = 0;
+        let y = 0;
 
         for (let i = 0; i < n; i++) {
             const color = this.colourPool.pop();
 
             const button = new MemoryButton(i, color, this.container);
-            button.setPosition(0, i * 170);
+
+            if (x + buttonWidth > width) {
+                x = 0;
+                y += buttonHeight + buttonSpacing;
+            }
+
+            button.setPosition(y, x);
             button.disable();
-            
+
             this.buttons.push(button);
+            x += buttonWidth + buttonSpacing;
         }
     }
 
@@ -54,8 +75,13 @@ export class GameEngine {
         let count = 0;
 
         const interval = setInterval(() => {
-            const maxX = window.innerWidth - 160;
-            const maxY = window.innerHeight - 100;
+            const { width, height } = this.getBoardDimensions();
+
+            const buttonWidth = 150;
+            const buttonHeight = 80;
+
+            const maxX = width - buttonWidth;
+            const maxY = height - buttonHeight;
 
             this.buttons.forEach(button => {
                 button.setPosition(
