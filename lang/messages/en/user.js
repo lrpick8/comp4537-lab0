@@ -1,3 +1,8 @@
+/*
+All user-facing strings for the application in English. 
+Can add to this list or create new files for other languages as needed.
+*/
+
 export const STRINGS = {
     LABEL_PROMPT: "How many buttons to create?",
     BTN_LABEL: "Go!",

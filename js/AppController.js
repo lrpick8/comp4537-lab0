@@ -1,4 +1,9 @@
+/*
+Class meant to control the overall application flow. Constructs the UI elements, initializes the game engine and 
+matches the HTML elements to their respective event handlers. Contains initUI and startGame methods.
 
+Used ChatGPT to help write this class.
+*/
 import { STRINGS } from "../lang/messages/en/user.js";
 import { GameEngine } from "./GameEngine.js";
 import { NumberValidator } from "./NumberValidator.js";
