@@ -1,7 +1,7 @@
 
 import { STRINGS } from "../lang/messages/en/user.js";
 import { GameEngine } from "./GameEngine.js";
-import { Validator } from "./Validator.js";
+import { NumberValidator } from "./NumberValidator.js";
 
 export class AppController {
     constructor() {
@@ -24,7 +24,7 @@ export class AppController {
     }
 
     startGame() {
-        if (!Validator.isValidNumber(this.input.value)) {
+        if (!NumberValidator.isValidNumber(this.input.value)) {
             this.message.textContent = STRINGS.ERROR_INVALID_NUMBER;
             return;
         }
